@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, jsonify
 from scapy.all import sniff, IP, TCP, UDP, ICMP, DNS
 import requests
@@ -5,10 +6,12 @@ import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 import time
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
-VT_API_KEY = "ab8bb531dd5f740e703fffd4ee8edb25ddd2ae718e17c935ad956762f7a9bf22"
+VT_API_KEY = os.getenv("API_KEY")
 GEOLOCATION_API = "http://ip-api.com/json/"
 
 captured_packets = []
